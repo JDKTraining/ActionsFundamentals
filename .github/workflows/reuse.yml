@@ -1,0 +1,16 @@
+name: Resue other workflow
+on:
+  workflow_dispatch:
+
+jobs:
+  workflow-call:
+    uses: ./github/workflows/reusable.yml
+    with:
+      who-to-greet: me
+  use-output:
+    runs-on: ubuntu-latest
+    needs: workflow-call
+    steps:
+      - run: echo "${{ needs.workflow-call.outputs.current-time }}"
+    
+      
